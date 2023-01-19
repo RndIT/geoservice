@@ -1,7 +1,11 @@
 package main
 
-import "geoservice/cmd"
+import (
+	"fmt"
+	"geoservice/cmd"
+)
 
 func main() {
 	cmd.Execute()
+	fmt.Println("s")
 }
