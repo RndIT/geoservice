@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	cmd.Execute()
+	cmd.Run()
 	fmt.Println("s")
 }

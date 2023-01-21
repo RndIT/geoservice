@@ -1,0 +1,24 @@
+package logger
+
+import (
+	"fmt"
+	"sync"
+)
+
+type stdPrintLog struct {
+	
+}
+
+var stdLogInstance *stdPrintLog = nil
+var once sync.Once
+
+func (l stdPrintLog) Build() stdPrintLog{
+	once.Do(func() {
+		stdLogInstance = &stdPrintLog{}
+	})
+	return *stdLogInstance
+}
+
+func (l stdPrintLog) Debug(v ...any) {
+	fmt.Print(v...)
+}
