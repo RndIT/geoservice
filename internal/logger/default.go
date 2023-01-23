@@ -5,21 +5,22 @@ import (
 	"sync"
 )
 
-type DefPrintLog struct {
+type SimpleLogger struct {
 	log *log.Logger
 }
 
-var defLogInstance *DefPrintLog = nil
-var onceDef sync.Once
+var instanceSimpleLogger *SimpleLogger = nil
 
-func BuildDefault() *DefPrintLog {
-	onceDef.Do(func() {
-		defLogInstance = &DefPrintLog{}
-		defLogInstance.log = log.Default()
+func BuildSimpleLogger() *SimpleLogger {
+	var once sync.Once
+	once.Do(func() {
+		instanceSimpleLogger = &SimpleLogger{}
+		instanceSimpleLogger.log = log.Default()
 	})
-	return defLogInstance
+
+	return instanceSimpleLogger
 }
 
-func (l DefPrintLog) Debug(v ...any) {
-	defLogInstance.log.Print(v...)
+func (l SimpleLogger) Debug(v ...any) {
+	instanceSimpleLogger.log.Print(v...)
 }

@@ -1,7 +1,8 @@
 package domain
 
 import "fmt"
-
-func Print() {
+import "geoservice/internal/logger"
+func Log(l logger) {
 	fmt.Println("Domain run")
+	l.D
 }

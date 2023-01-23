@@ -8,24 +8,25 @@ type Logger interface {
 	Debug(v ...any)
 }
 type logger struct {
-	Log *DefPrintLog
+	Log *SimpleLogger
 }
 
 var myLog *logger
-var onceLocal sync.Once
+var once sync.Once
 
 // enum
 type LogType int
 
 const (
-	PrintLog LogType = iota + 1
-	StdLog
+	EPrintLog LogType = iota + 1
+	EStdLog
 )
 
 func GetLog(logType LogType) Logger {
-	onceLocal.Do(func() {
+	once.Do(func() {
 		myLog = &logger{}
-		myLog.Log = BuildDefault()
+		myLog.Log = BuildSimpleLogger()
+
 	})
 	return *myLog.Log
 }
