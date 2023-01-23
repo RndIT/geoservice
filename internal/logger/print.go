@@ -6,18 +6,15 @@ import (
 )
 
 type PrintLogger struct {
-	//log *log.Logger
 }
 
 var instancePrintLogger *PrintLogger = nil
-
-func BuildPrintLogger() *PrintLogger {
-	var once sync.Once
-	once.Do(func() {
+var oncePL sync.Once
+func BuildPrintLogger() Logger {
+	oncePL.Do(func() {
 		instancePrintLogger = &PrintLogger{}
-		//instanceLogger.log = log.Default()
+		instancePrintLogger.Debug("Instance Print logger done")
 	})
-
 	return instancePrintLogger
 }
 

@@ -6,16 +6,17 @@ import (
 )
 
 type SimpleLogger struct {
-	log *log.Logger
+	log log.Logger
 }
 
 var instanceSimpleLogger *SimpleLogger = nil
-
-func BuildSimpleLogger() *SimpleLogger {
-	var once sync.Once
-	once.Do(func() {
+var onceSL sync.Once
+func BuildSimpleLogger() Logger {
+	
+	onceSL.Do(func() {
 		instanceSimpleLogger = &SimpleLogger{}
-		instanceSimpleLogger.log = log.Default()
+		instanceSimpleLogger.log = *log.Default()
+		instanceSimpleLogger.Debug("Init Simple logger done")
 	})
 
 	return instanceSimpleLogger
